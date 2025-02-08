@@ -9,9 +9,9 @@
         "poolserver",
         "komodo"
     ],
-    "homepage": "https://github.com/webworker01/knomp",
+    "homepage": "https://github.com/TESTERT-TEST/knomps",
     "bugs": {
-        "url": "https://github.com/webworker01/knomp/issues"
+        "url": "https://github.com/TESTERT-TEST/knomps/issues"
     },
     "license": "GPL-2.0",
     "author": "webworker01",
@@ -26,7 +26,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/webworker01/knomp.git"
+        "url": "https://github.com/TESTERT-TEST/knomps.git"
     },
     "dependencies": {
         "async": "^2.6.3",
@@ -45,13 +45,13 @@
         "nonce": "1.0.4",
         "redis": "3.1.1",
         "request": "2.88.2",
-        "stratum-pool": "github:webworker01/node-stratum-pool.git"
+        "stratum-pool": "github:TESTERT-TEST/node-stratum-pools.git"
     },
     "engines": {
         "node": ">=10 <11"
     },
     "scripts": {
-        "start": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/node_modules/stratum-pool/node_modules/equihashverify/build/Release/:$PWD/node_modules/equihashverify/build/Release/ node init.js",
+        "start": "NODE_PATH=$NODE_PATH:$PWD/node_modules/randomxhash/build/Release/:$PWD/node_modules/stratum-pool/node_modules/randomxhash/build/Release/ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/node_modules/stratum-pool/node_modules/equihashverify/build/Release/:$PWD/node_modules/equihashverify/build/Release/:$PWD/node_modules/randomxhash/build/Release/:$PWD/node_modules/stratum-pool/node_modules/randomxhash/build/Release/ node init.js",
         "debug": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/node_modules/stratum-pool/node_modules/equihashverify/build/Release/:$PWD/node_modules/equihashverify/build/Release/ node --inspect init.js"
     }
 }
