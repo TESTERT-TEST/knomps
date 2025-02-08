@@ -16,6 +16,12 @@ jobs:
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2  # Set up Docker
 
+    - name: Install Docker Compose
+      run: |
+        # Install Docker Compose on the runner
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
     - name: Build and start Docker containers
       run: |
         # Clone the project and go into the knomp directory
