@@ -1,0 +1,48 @@
+name: Build and Run Knomp with Docker and Redis
+
+on:
+  push:
+    branches:
+      - main  # или другая ветка
+  pull_request:
+    branches:
+      - main  # или другая ветка
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Указываем платформу для работы
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Клонируем репозиторий
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2  # Устанавливаем Docker
+
+    - name: Build and start Docker containers
+      run: |
+        # Клонируем проект и перемещаемся в каталог knomp
+        git clone https://github.com/TESTERT-TEST/knomps.git
+        cd knomps
+
+        # Копируем пример конфигурации
+        cp config_example.json config.json
+
+        # Запускаем Redis контейнер
+        docker run --name redis -d -p 6379:6379 redis:latest
+
+        # Запускаем контейнеры Knomp
+        docker-compose up -d
+
+        # Подождем несколько секунд, чтобы контейнеры успели запуститься
+        sleep 10
+
+        # Получаем логи из контейнеров
+        docker logs $(docker ps -q) > docker_logs.txt  # Сохраняем логи всех контейнеров в файл
+        cat docker_logs.txt  # Выводим логи в консоль GitHub Actions
+
+    - name: Upload logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-logs
+        path: docker_logs.txt  # Загружаем файл с логами
