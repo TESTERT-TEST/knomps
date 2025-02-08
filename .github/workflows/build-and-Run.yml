@@ -3,7 +3,7 @@ name: Build and Run Knomp with Docker and Redis
 on:
   push:
     branches:
-      - main  # or another branch
+      - master  # or another branch
 
 jobs:
   build:
