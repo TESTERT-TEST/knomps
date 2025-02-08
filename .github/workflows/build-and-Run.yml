@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main  # or another branch
-  pull_request:
-    branches:
-      - main  # or another branch
 
 jobs:
   build:
