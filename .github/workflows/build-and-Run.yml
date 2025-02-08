@@ -3,46 +3,46 @@ name: Build and Run Knomp with Docker and Redis
 on:
   push:
     branches:
-      - master  # или другая ветка
+      - main  # or another branch
   pull_request:
     branches:
-      - master  # или другая ветка
+      - main  # or another branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Указываем платформу для работы
+    runs-on: ubuntu-latest  # Specify the platform
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2  # Клонируем репозиторий
+      uses: actions/checkout@v2  # Checkout the repository
 
     - name: Set up Docker
-      uses: docker/setup-buildx-action@v2  # Устанавливаем Docker
+      uses: docker/setup-buildx-action@v2  # Set up Docker
 
     - name: Build and start Docker containers
       run: |
-        # Клонируем проект и перемещаемся в каталог knomp
+        # Clone the project and go into the knomp directory
         git clone https://github.com/TESTERT-TEST/knomps.git
         cd knomps
 
-        # Копируем пример конфигурации
+        # Copy the example config file
         cp config_example.json config.json
 
-        # Запускаем Redis контейнер
+        # Run the Redis container
         docker run --name redis -d -p 6379:6379 redis:latest
 
-        # Запускаем контейнеры Knomp
+        # Start the Knomp containers
         docker-compose up -d
 
-        # Подождем несколько секунд, чтобы контейнеры успели запуститься
+        # Wait a few seconds for containers to initialize
         sleep 10
 
-        # Получаем логи из контейнеров
-        docker logs $(docker ps -q) > docker_logs.txt  # Сохраняем логи всех контейнеров в файл
-        cat docker_logs.txt  # Выводим логи в консоль GitHub Actions
+        # Get logs from the containers
+        docker logs $(docker ps -q) > docker_logs.txt  # Save logs from all containers to a file
+        cat docker_logs.txt  # Display the logs in the GitHub Actions console
 
     - name: Upload logs
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4  # Use the latest version (v3) of the upload-artifact action
       with:
         name: docker-logs
-        path: docker_logs.txt  # Загружаем файл с логами
+        path: docker_logs.txt  # Upload the logs file as an artifact
