@@ -184,7 +184,6 @@ In pool_config:
     "paymentInterval": 180,
     "maxBlocksPerPayment": 20,
 ```
-
 ### More Resources
 [Further info on config](https://github.com/zone117x/node-open-mining-portal#2-configuration) and some [sample configs](https://github.com/z-classic/z-nomp)
 
