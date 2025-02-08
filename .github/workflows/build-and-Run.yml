@@ -3,10 +3,10 @@ name: Build and Run Knomp with Docker and Redis
 on:
   push:
     branches:
-      - main  # или другая ветка
+      - master  # или другая ветка
   pull_request:
     branches:
-      - main  # или другая ветка
+      - master  # или другая ветка
 
 jobs:
   build:
