@@ -8,7 +8,7 @@ RUN apt-get update -y && \
     cmake pkg-config
 
 # Установка Node.js 14 (более совместим со старыми пакетами)
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
     apt-get install -y nodejs
 
 RUN useradd knomp
