@@ -1,10 +1,14 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL maintainer="webworker01"
+
+# Установка переменной окружения для избежания интерактивных запросов
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y && \
     apt-get install -y gcc g++ make libboost-dev libboost-system-dev libsodium-dev sudo curl git iputils-ping
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+# Установка современной версии Node.js (LTS)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && \
     apt-get install -y nodejs
 
 RUN useradd knomp
