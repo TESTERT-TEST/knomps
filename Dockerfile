@@ -1,14 +1,10 @@
-FROM ubuntu:20.04
+FROM ubuntu:18.04
 LABEL maintainer="webworker01"
 
-ENV DEBIAN_FONTEND=noninteractive
-
 RUN apt-get update -y && \
-    apt-get install -y gcc g++ make libboost-dev libboost-system-dev libsodium-dev sudo curl git iputils-ping \
-    cmake pkg-config
+    apt-get install -y gcc g++ make libboost-dev libboost-system-dev libsodium-dev sudo curl git iputils-ping
 
-# Установка Node.js 14 (более совместим со старыми пакетами)
-RUN curl -fsSL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
     apt-get install -y nodejs
 
 RUN useradd knomp
@@ -20,8 +16,7 @@ RUN echo "knomp ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
 
 USER knomp
 
-# Попробуйте с флагом --legacy-peer-deps
-RUN cd /home/knomp/knomp && npm install --legacy-peer-deps
+RUN cd /home/knomp/knomp && npm install
 
 WORKDIR /home/knomp/knomp
 
